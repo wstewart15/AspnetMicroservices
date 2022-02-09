@@ -1,5 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
+using catalog.api.Data;
+using catalog.api.Repositories;
+using Microsoft.OpenApi.Models;
 
+var builder = WebApplication.CreateBuilder(args);
+//builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+//{
+//    config.AddJsonFile("appsettings.json",
+//                       optional: false,
+//                       reloadOnChange: true);
+//});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -7,13 +16,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.API", Version = "v1" });
+});
+
+//builder.Services.AddHealthChecks()
+//        .AddMongoDb(Configuration["DatabaseSettings:ConnectionString"], "MongoDb Health", HealthStatus.Degraded);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1"));
 }
 
 app.UseAuthorization();
