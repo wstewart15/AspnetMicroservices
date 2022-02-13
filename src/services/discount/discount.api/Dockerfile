@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["services/discount.api/discount.api/discount.api.csproj", "services/discount.api/discount.api/"]
-RUN dotnet restore "services/discount.api/discount.api/discount.api.csproj"
+COPY ["services/discount/discount.api/discount.api.csproj", "services/discount/discount.api/"]
+RUN dotnet restore "services/discount/discount.api/discount.api.csproj"
 COPY . .
-WORKDIR "/src/services/discount.api/discount.api"
+WORKDIR "/src/services/discount/discount.api"
 RUN dotnet build "discount.api.csproj" -c Release -o /app/build
 
 FROM build AS publish
