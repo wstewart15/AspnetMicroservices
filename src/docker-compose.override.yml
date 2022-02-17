@@ -150,3 +150,13 @@ services:
     ports:
         - "8005:80"
 
+
+  aspnetrunbasics:
+    container_name: aspnetrunbasics
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - "ApiSettings__GatewayAddress=http://ocelot.apigateway"
+    depends_on:
+        - ocelot.apigateway
+    ports:
+        - "8006:80"
