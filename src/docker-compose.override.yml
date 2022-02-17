@@ -124,7 +124,7 @@ services:
 
 
   ocelot.apigateway:
-    container_name: ocelotapigw
+    container_name: ocelot.apigateway
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
