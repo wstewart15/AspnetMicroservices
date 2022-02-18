@@ -1,5 +1,10 @@
+using Common.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using shopping.aggregator.Policies;
 using shopping.aggregator.Services;
 using shopping.aggregator.Services.impl;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +25,25 @@ void ConfigureConfiguration(ConfigurationManager configuration)
 }
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
+    services.AddTransient<LoggingDelegatingHandler>();
+
     services.AddHttpClient<ICatalogService, CatalogService>(c =>
-       c.BaseAddress = new Uri(configuration["ApiSettings:CatalogUrl"]));
+       c.BaseAddress = new Uri(configuration["ApiSettings:CatalogUrl"]))
+        .AddHttpMessageHandler<LoggingDelegatingHandler>()
+        .AddPolicyHandler(Policies.RetryPolicy())
+        .AddPolicyHandler(Policies.CircuitBreakerPolicy());
 
     services.AddHttpClient<IBasketService, BasketService>(c =>
-       c.BaseAddress = new Uri(configuration["ApiSettings:BasketUrl"]));
+       c.BaseAddress = new Uri(configuration["ApiSettings:BasketUrl"]))
+        .AddHttpMessageHandler<LoggingDelegatingHandler>()
+        .AddPolicyHandler(Policies.RetryPolicy())
+        .AddPolicyHandler(Policies.CircuitBreakerPolicy());
 
     services.AddHttpClient<IOrderService, OrderService>(c =>
-        c.BaseAddress = new Uri(configuration["ApiSettings:OrderingUrl"]));
+        c.BaseAddress = new Uri(configuration["ApiSettings:OrderingUrl"]))
+        .AddHttpMessageHandler<LoggingDelegatingHandler>()
+        .AddPolicyHandler(Policies.RetryPolicy())
+        .AddPolicyHandler(Policies.CircuitBreakerPolicy());
 
     services.AddControllers();
     
