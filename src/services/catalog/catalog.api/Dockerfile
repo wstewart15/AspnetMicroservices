@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["services/catalog/catalog.api/catalog.api.csproj", "services/catalog/catalog.api/"]
+COPY ["common/Common.Logging/Common.Logging.csproj", "common/Common.Logging/"]
 RUN dotnet restore "services/catalog/catalog.api/catalog.api.csproj"
 COPY . .
 WORKDIR "/src/services/catalog/catalog.api"

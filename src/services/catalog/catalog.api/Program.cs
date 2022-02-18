@@ -1,11 +1,15 @@
 using catalog.api.Data;
 using catalog.api.Repositories;
+using Common.Logging;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 ConfigureConfiguration(builder.Configuration);
 ConfigureServices(builder.Services, builder.Configuration);

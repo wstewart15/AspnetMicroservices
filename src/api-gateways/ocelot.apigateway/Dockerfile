@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["api-gateways/ocelot.apigateway/ocelot.apigateway.csproj", "api-gateways/ocelot.apigateway/"]
+COPY ["common/Common.Logging/Common.Logging.csproj", "common/Common.Logging/"]
 RUN dotnet restore "api-gateways/ocelot.apigateway/ocelot.apigateway.csproj"
 COPY . .
 WORKDIR "/src/api-gateways/ocelot.apigateway"

@@ -1,12 +1,16 @@
 using basket.api.GrpcServices;
 using basket.api.Repositories;
+using Common.Logging;
 using discount.grpc.protos;
 using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddStackExchangeRedisCache(options =>

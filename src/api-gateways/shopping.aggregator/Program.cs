@@ -6,10 +6,12 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using shopping.aggregator.Policies;
 using shopping.aggregator.Services;
 using shopping.aggregator.Services.impl;
-
+using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 ConfigureConfiguration(builder.Configuration);
 ConfigureServices(builder.Services, builder.Configuration);
@@ -24,7 +26,7 @@ app.Run();
 
 //Local Configuration methods
 void ConfigureConfiguration(ConfigurationManager configuration)
-{ 
+{
 }
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {

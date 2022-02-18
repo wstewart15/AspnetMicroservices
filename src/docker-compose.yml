@@ -64,9 +64,16 @@ services:
       context: .
       dockerfile: webapps/AspnetRunBasics/Dockerfile
 
+  webstatus:
+    image: ${DOCKER_REGISTRY-}webstatus
+    build:
+      context: .
+      dockerfile: webapps/WebStatus/Dockerfile
+
 volumes:
   mongo_data:
   postgres_data:
+
 
 
 

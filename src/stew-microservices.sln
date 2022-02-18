@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api-gateways", "api-gateway
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ocelot.apigateway", "api-gateways\ocelot.apigateway\ocelot.apigateway.csproj", "{7B879820-24D2-413D-B1D3-00C9152338F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping.aggregator", "api-gateways\shopping.aggregator\shopping.aggregator.csproj", "{F3D219DC-3673-4323-A4DF-3226BC36EE04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping.aggregator", "api-gateways\shopping.aggregator\shopping.aggregator.csproj", "{F3D219DC-3673-4323-A4DF-3226BC36EE04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webapps", "webapps", "{85A62D73-9836-4890-AB60-525EA72098A3}"
 EndProject
@@ -51,7 +51,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-admin.yml = docker-admin.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "common\Common.Logging\Common.Logging.csproj", "{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Logging", "common\Common.Logging\Common.Logging.csproj", "{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStatus", "webapps\WebStatus\WebStatus.csproj", "{FCF01163-9297-44A2-86FB-2154FEDBB852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,10 @@ Global
 		{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF01163-9297-44A2-86FB-2154FEDBB852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF01163-9297-44A2-86FB-2154FEDBB852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF01163-9297-44A2-86FB-2154FEDBB852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF01163-9297-44A2-86FB-2154FEDBB852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +143,7 @@ Global
 		{F3D219DC-3673-4323-A4DF-3226BC36EE04} = {8B9289DF-2271-4BA3-898A-7F840E19ED3E}
 		{4DCF2595-D952-4C6A-834A-A7CB17EE10A8} = {85A62D73-9836-4890-AB60-525EA72098A3}
 		{E1E2DCE0-820A-4E90-99BA-F54BAB13A0EF} = {CFA2C1E9-2A15-4D27-BA57-0AF733F8AB7B}
+		{FCF01163-9297-44A2-86FB-2154FEDBB852} = {85A62D73-9836-4890-AB60-525EA72098A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65B7D4F3-28F0-491A-93CF-8B9ECD6002BD}
