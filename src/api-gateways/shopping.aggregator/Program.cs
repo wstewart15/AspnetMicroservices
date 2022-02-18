@@ -1,5 +1,8 @@
 using Common.Logging;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using shopping.aggregator.Policies;
 using shopping.aggregator.Services;
 using shopping.aggregator.Services.impl;
@@ -50,7 +53,13 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
+
+    services.AddHealthChecks()
+        .AddUrlGroup(new Uri($"{configuration["ApiSettings:CatalogUrl"]}/swagger/index.html"), "Catalog.API", HealthStatus.Degraded)
+        .AddUrlGroup(new Uri($"{configuration["ApiSettings:BasketUrl"]}/swagger/index.html"), "Basket.API", HealthStatus.Degraded)
+        .AddUrlGroup(new Uri($"{configuration["ApiSettings:OrderingUrl"]}/swagger/index.html"), "Ordering.API", HealthStatus.Degraded);
 }
+
 void ConfigureMiddleware(IApplicationBuilder app, IHostEnvironment env, IServiceProvider services)
 {
     // Configure the HTTP request pipeline.
@@ -65,4 +74,9 @@ void ConfigureMiddleware(IApplicationBuilder app, IHostEnvironment env, IService
 void ConfigureEndpoints(IEndpointRouteBuilder app, IServiceProvider services)
 {
     app.MapControllers();
+    app.MapHealthChecks("/hc", new HealthCheckOptions()
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 }
